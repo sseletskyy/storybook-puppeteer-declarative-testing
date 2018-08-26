@@ -1,0 +1,27 @@
+const path = require('path')
+const webpack = require('@storybook/react/node_modules/webpack')
+const Dotenv = require('dotenv-webpack')
+
+const resolveRoot = (subPath = '') => path.join(__dirname, `../src/${subPath}`)
+
+module.exports = (baseConfig, env, defaultConfig) => {
+  // console.log('\n\n!!!!!!!!!', defaultConfig.plugins[3].definitions)
+  console.log('!!!!!! env', baseConfig)
+  // defaultConfig.resolve.modules.push(resolveRoot(''))
+
+  const babelLoader = {
+    test: /\.(js|jsx?)$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+    },
+  }
+
+  const lessLoader = { test: /\.(css|less?)$/, use: ['style-loader', 'css-loader', 'less-loader'] }
+
+  defaultConfig.module.rules.push(lessLoader)
+  defaultConfig.module.rules.push(babelLoader)
+  // defaultConfig.plugins.push(new Dotenv())
+  // console.log('\n\n!!!!!!!!!', defaultConfig.plugins[3])
+  return defaultConfig
+}

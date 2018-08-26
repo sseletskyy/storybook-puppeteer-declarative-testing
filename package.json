@@ -1,0 +1,64 @@
+{
+  "name": "storybook-puppeteer-declarative-testing",
+  "version": "1.0.0",
+  "description": "Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=AVA ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sseletskyy/storybook-puppeteer-declarative-testing.git"
+  },
+  "keywords": [
+    "testing",
+    "e2e",
+    "jest",
+    "puppeteer",
+    "storybook",
+    "declarative",
+    "test",
+    "generator",
+    "fixture",
+    "chrome",
+    "headless",
+    "react"
+  ],
+  "author": "Serge Seletskyy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sseletskyy/storybook-puppeteer-declarative-testing/issues"
+  },
+  "homepage": "https://github.com/sseletskyy/storybook-puppeteer-declarative-testing#readme",
+  "dependencies": {
+    "@storybook/react": "4.0.0-alpha.16",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "ramda": "^0.25.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "jest": "^23.5.0",
+    "jest-environment-node": "^23.4.0",
+    "jest-puppeteer": "^3.3.1",
+    "puppeteer": "^1.7.0"
+  },
+  "ava": {
+    "babel": "inherit",
+    "concurrency": 2,
+    "files": [
+      "tests/**/*.ava.js"
+    ],
+    "verbose": true,
+    "require": [
+      "babel-register"
+    ]
+  }
+}
