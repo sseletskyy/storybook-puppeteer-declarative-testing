@@ -4,7 +4,11 @@
   "description": "Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=AVA ava"
+    "lint": "eslint ./**/*.js",
+    "flint": "eslint ./**/*.js  --fix",
+    "test": "NODE_ENV=AVA ava",
+    "test:cover": "nyc npm run test",
+    "tc": "npm run test:cover"
   },
   "repository": {
     "type": "git",
@@ -32,6 +36,7 @@
   "homepage": "https://github.com/sseletskyy/storybook-puppeteer-declarative-testing#readme",
   "dependencies": {
     "@storybook/react": "4.0.0-alpha.16",
+    "debug": "^3.1.0",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "ramda": "^0.25.0",
@@ -40,14 +45,27 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
+    "babel-eslint": "8.1.2",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "eslint": "4.13.1",
+    "eslint-config-airbnb": "^16.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-loader": "2.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.18.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-standard": "^3.1.0",
     "jest": "^23.5.0",
     "jest-environment-node": "^23.4.0",
     "jest-puppeteer": "^3.3.1",
+    "nyc": "^12.0.2",
+    "prettier": "^1.14.2",
     "puppeteer": "^1.7.0"
   },
   "ava": {
@@ -60,5 +78,24 @@
     "require": [
       "babel-register"
     ]
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-0"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "parser": "babylon",
+    "semi": false,
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "jsxBracketSameLine": false
   }
 }

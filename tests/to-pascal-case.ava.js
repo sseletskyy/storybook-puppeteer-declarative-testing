@@ -1,7 +1,7 @@
 const test = require('ava')
-const {toPascalCase} = require('../lib/story-index-generator')
+const { toPascalCase } = require('../lib/story-index-generator')
 
-test('toPascalCase', t => {
+test('toPascalCase', (t) => {
   t.is(toPascalCase('abc'), 'Abc')
   t.is(toPascalCase('abc-def'), 'AbcDef')
   t.is(toPascalCase('aBC-dEF'), 'AbcDef')

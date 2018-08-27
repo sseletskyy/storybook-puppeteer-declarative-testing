@@ -1,0 +1,6 @@
+{
+  "storybookPuppeteerDeclarativeTesting": {
+    "pathToStories": "./pathToStories",
+    "pathToTestIndex": "./pathToTestIndex"
+  }
+}
