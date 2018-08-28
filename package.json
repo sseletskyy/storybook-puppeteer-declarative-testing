@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner",
   "main": "index.js",
+  "bin": {
+    "generate-story-index": "./bin/generate-story-index.js",
+    "generate-test-index": "./bin/generate-test-index.js"
+  },
   "scripts": {
     "lint": "eslint ./**/*.js",
     "flint": "eslint ./**/*.js  --fix",
     "test": "NODE_ENV=AVA ava",
     "test:cover": "nyc npm run test",
-    "tc": "npm run test:cover"
+    "tc": "npm run test:cover",
+    "gsi": "generate-story-index"
   },
   "repository": {
     "type": "git",
@@ -38,10 +43,12 @@
     "@storybook/react": "4.0.0-alpha.16",
     "debug": "^3.1.0",
     "fs": "^0.0.1-security",
+    "monet": "^0.8.10",
     "path": "^0.12.7",
     "ramda": "^0.25.0",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "shelljs": "^0.8.2"
   },
   "devDependencies": {
     "ava": "^0.25.0",
