@@ -1,7 +1,14 @@
 const test = require('ava')
 const R = require('ramda')
 const os = require('os')
-const { findPackageJson, getConfig, DEFAULT_CONFIG, PACKAGE_JSON_CONFIG_KEY } = require('../lib/config')
+const {
+  findPackageJson,
+  getConfig,
+  DEFAULT_CONFIG,
+  PACKAGE_JSON_CONFIG_KEY,
+  generateScriptsForPackageJson,
+  generateConfigForPackageJson,
+} = require('../lib/config')
 const overriddenConfig = require('./config.json')
 
 test(`findPackageJson should return nearest path to package.json`, (t) => {
@@ -24,10 +31,11 @@ test(`getConfig should return default config if package.json not found`, (t) => 
   t.deepEqual(actual, DEFAULT_CONFIG)
 })
 
-test(`getConfig should return default config overridden by config.json`, (t) => {
+test(`getConfig should return default config overridden by config.json + projectRoot`, (t) => {
   const configPath = `${__dirname}/config.json`
   const actual = getConfig(configPath)
-  const expected = Object.assign({}, DEFAULT_CONFIG, overriddenConfig[PACKAGE_JSON_CONFIG_KEY])
+  const projectRoot = __dirname // dir where package.json is located
+  const expected = Object.assign({}, DEFAULT_CONFIG, overriddenConfig[PACKAGE_JSON_CONFIG_KEY], { projectRoot })
   t.deepEqual(actual, expected)
 })
 
@@ -35,5 +43,26 @@ test('getConfig should return DEFAULT_CONFIG if configPath is incorrect', (t) =>
   const configPath = `${__dirname}/package.json`
   const actual = getConfig(configPath)
   const expected = DEFAULT_CONFIG
+  t.is(actual, expected)
+})
+
+test('generateScriptsForPackageJson', (t) => {
+  const actual = generateScriptsForPackageJson()
+  const expected = `  "scripts": {
+    ...
+    "spdt:generate-story-index": "./node_modules/.bin/generate-story-index",
+    "spdt:generate-test-index": "./node_modules/.bin/generate-test-index",
+    "spdt:generate-tests": "./node_modules/.bin/generate-tests"
+  }`
+  t.is(actual, expected)
+})
+test('generateConfigForPackageJson', (t) => {
+  const actual = generateConfigForPackageJson()
+  const expected = `  "${PACKAGE_JSON_CONFIG_KEY}": {
+    "pathToSrc": "./src",
+    "pathToStories": "./stories",
+    "pathToTestIndex": "./e2e",
+    "testIndexName": "test-index.generated.js"
+  }`
   t.is(actual, expected)
 })
