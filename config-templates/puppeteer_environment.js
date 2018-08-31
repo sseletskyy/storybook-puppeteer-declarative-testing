@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+/* eslint-disable */
 const NodeEnvironment = require('jest-environment-node')
 const puppeteer = require('puppeteer')
 const fs = require('fs')
@@ -13,7 +13,7 @@ class PuppeteerEnvironment extends NodeEnvironment {
   //   }
 
   async setup() {
-    console.log(chalk.yellow('Setup Test Environment.'))
+    console.log('Setup Test Environment.')
     await super.setup()
     const wsEndpoint = fs.readFileSync(path.join(DIR, 'wsEndpoint'), 'utf8')
     if (!wsEndpoint) {
@@ -23,7 +23,7 @@ class PuppeteerEnvironment extends NodeEnvironment {
   }
 
   async teardown() {
-    console.log(chalk.yellow('Teardown Test Environment.'))
+    console.log('Teardown Test Environment.')
     await super.teardown()
   }
 
@@ -33,3 +33,4 @@ class PuppeteerEnvironment extends NodeEnvironment {
 }
 
 module.exports = PuppeteerEnvironment
+/* eslint-enable */

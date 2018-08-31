@@ -50,9 +50,14 @@ test('generateScriptsForPackageJson', (t) => {
   const actual = generateScriptsForPackageJson()
   const expected = `  "scripts": {
     ...
-    "spdt:generate-story-index": "./node_modules/.bin/generate-story-index",
-    "spdt:generate-test-index": "./node_modules/.bin/generate-test-index",
-    "spdt:generate-tests": "./node_modules/.bin/generate-tests"
+    "spdt:generate-story-index": "./node_modules/.bin/spdt:generate-story-index",
+    "spdt:generate-test-index": "./node_modules/.bin/spdt:generate-test-index",
+    "spdt:generate-tests": "./node_modules/.bin/spdt:generate-tests",
+    "spdt:test": "jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
+    "spdt:test:chrome": "HEADLESS=false jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
+    "spdt:test:chrome:slow": "SLOWMO=1000 HEADLESS=false jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
+    "spdt:storybook": "start-storybook -p 9009 -c ./.spdt",
+    "spdt": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook"
   }`
   t.is(actual, expected)
 })
@@ -60,8 +65,8 @@ test('generateConfigForPackageJson', (t) => {
   const actual = generateConfigForPackageJson()
   const expected = `  "${PACKAGE_JSON_CONFIG_KEY}": {
     "pathToSrc": "./src",
-    "pathToStories": "./stories",
-    "pathToTestIndex": "./e2e",
+    "pathToStories": "./.spdt",
+    "pathToTestIndex": "./.spdt",
     "testIndexName": "test-index.generated.js"
   }`
   t.is(actual, expected)

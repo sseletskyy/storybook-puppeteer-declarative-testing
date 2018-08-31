@@ -3,7 +3,7 @@
 //const [, , ...args] = process.argv
 //console.log(`BEGIN: generate story index: args = ${args}`)
 const shell = require('shelljs')
-const { generateTestIndex } = require('../index')
+const { generateTestIndex } = require('../lib/story-index-generator')
 const { PACKAGE_JSON_CONFIG_KEY } = require('../lib/config')
 
 const either = generateTestIndex()

@@ -7,7 +7,7 @@ when pathToStories is two levels deep`, (t) => {
   const pathToSrc = `${__dirname}/../example-src`
   const pathToStories = `${__dirname}/stories`
   const { content: actual } = generateContentForStoryIndex(pathToSrc, pathToStories)
-  const expected = `const {storyGenerator} = require('storybook-puppeteer-declarative-testing')
+  const expected = `const {storyGenerator} = require('spdt')
 require('../../example-src/components/simple-component.story.js').default(
   storyGenerator,
 )
@@ -20,7 +20,7 @@ when pathToStories is one level deep`, (t) => {
   const pathToSrc = `${__dirname}/../example-src`
   const pathToStories = `${__dirname}/../stories`
   const { content: actual } = generateContentForStoryIndex(pathToSrc, pathToStories)
-  const expected = `const {storyGenerator} = require('storybook-puppeteer-declarative-testing')
+  const expected = `const {storyGenerator} = require('spdt')
 require('../example-src/components/simple-component.story.js').default(
   storyGenerator,
 )

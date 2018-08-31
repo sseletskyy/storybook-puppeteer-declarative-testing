@@ -7,7 +7,7 @@ when pathToStories is one level deep`, (t) => {
   const pathToSrc = `${__dirname}/../example-src`
   const pathToTestIndex = `${__dirname}`
   const { content: actual } = generateContentForTestIndex(pathToSrc, pathToTestIndex)
-  const expected = `const {testGenerator} = require('storybook-puppeteer-declarative-testing')
+  const expected = `const {testGenerator} = require('spdt/lib/test-generator')
 
 const fixtures0 = require('../example-src/components/simple-component.fixture.js')
   .default

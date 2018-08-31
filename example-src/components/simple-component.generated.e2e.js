@@ -9,7 +9,7 @@ describe(
       // eslint-disable-next-line no-underscore-dangle
       page = await global.__BROWSER__.newPage()
       // prettier-ignore
-      await page.goto('http://localhost:9001/?selectedKind=SimpleComponent&selectedStory=fixtureOne')
+      await page.goto('http://localhost:9009/?selectedKind=SimpleComponent&selectedStory=fixtureOne')
       const frames = await page.frames()
       iFrame = frames.find((f) => f.name() === 'storybook-preview-iframe')
     }, TIMEOUT)

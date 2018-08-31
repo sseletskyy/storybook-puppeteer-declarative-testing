@@ -11,13 +11,14 @@ const {
   testCheckAxes,
   saveFile,
 } = require('../lib/test-generator')
+const { STORYBOOK_PORT } = require('../lib/config')
 const fixtures = require('../example-src/components/simple-component.fixture.js').default
 
 const IMPORT_INDEX = 0
 const DESCRIBE_INDEX = 1
 
 const pathToSrc = `${__dirname}/../example-src`
-const pathToTestIndex = `${__dirname}/e2e`
+const pathToTestIndex = `${__dirname}/spdt`
 const file = '../../example-src/components/simple-component.story.js'
 const componentName = 'SimpleComponent'
 const fixtureName = Object.keys(fixtures)[0]
@@ -44,7 +45,7 @@ const setup = () => {
 
 test(`getFileName: check relative path generation`, (t) => {
   const { fileName, file: fl, pathToTestIndex: ptti } = setup()
-  const expected = [ptti, '/', fl.replace('.story.', '.generated.e2e.')].join('')
+  const expected = [ptti, '/', fl.replace('.story.', '.generated.spdt.')].join('')
   t.is(fileName, expected)
 })
 
@@ -63,7 +64,7 @@ test(`generateContent: check generated describe title`, (t) => {
 
 test(`generateContent: check generated describe page.goto url`, (t) => {
   const { content, componentName: cn, fixtureName: fn } = setup()
-  const expected = `http://localhost:9001/?selectedKind=${cn}&selectedStory=${fn}`
+  const expected = `http://localhost:${STORYBOOK_PORT}/?selectedKind=${cn}&selectedStory=${fn}`
   t.true(content[DESCRIBE_INDEX].includes(expected))
 })
 
@@ -89,7 +90,7 @@ test('testCheckArcs: when declaration is set should return generated it test', (
     props: {
       data: [1, 2, 3],
     },
-    e2e: { checkArcs: true },
+    spdt: { checkArcs: true },
   }
   const actual = testCheckArcs(fixture)
   const expectedItTitle = `it('should have ${fixture.props.data.length} arcs according to fixure data'`
@@ -111,7 +112,7 @@ test('testCheckAxes: when declaration is set should return generated it test', (
     props: {
       data: [1, 2, 3],
     },
-    e2e: { checkAxes },
+    spdt: { checkAxes },
   }
   const actual = testCheckAxes(fixture)
   const expectedItTitle = `it('should have ${checkAxes} axes'`
@@ -134,7 +135,7 @@ test('testCheckBars: when declaration is set should return generated it test', (
     props: {
       data: [1, 2, 3],
     },
-    e2e: { checkBars: true },
+    spdt: { checkBars: true },
   }
   const actual = testCheckBars(fixture)
   const expectedItTitle = `it('should have ${fixture.props.data.length} bars according to fixure data'`
@@ -155,7 +156,7 @@ test('testCheckSvg: when declaration is set should return generated it test', (t
     props: {
       data: [1, 2, 3],
     },
-    e2e: { checkSvg: true },
+    spdt: { checkSvg: true },
   }
   const actual = testCheckSvg(fixture)
   const expectedItTitle = `it('should load component as <svg>'`
@@ -176,7 +177,7 @@ test('testCheckSelector: when declaration is set should return generated it test
     props: {
       data: [1, 2, 3],
     },
-    e2e: { checkSelector },
+    spdt: { checkSelector },
   }
   const actual = testCheckSelector(fixture)
   const expectedItTitle = `it('should load component matching selector [${checkSelector}]'`
@@ -185,9 +186,9 @@ test('testCheckSelector: when declaration is set should return generated it test
   t.true(actual.includes(expectedSelector))
 })
 
-// test('saveFile: when path is incorrect should put error to debug logger', (t) => {
-//   const incorrectFile = path.resolve(__dirname, 'non-existed-dir', 'test-file-to.save')
-//   const content = 'test content'
-//   saveFile(incorrectFile, content)
-//   t.pass()
-// })
+test('saveFile: when path is incorrect should put error to debug logger', (t) => {
+  const incorrectFile = path.resolve(__dirname, 'non-existed-dir', 'test-file-to.save')
+  const content = 'test content'
+  saveFile(incorrectFile, content)
+  t.pass()
+})

@@ -1,4 +1,4 @@
-const {testGenerator} = require('storybook-puppeteer-declarative-testing')
+const {testGenerator} = require('spdt/lib/test-generator')
 
 const fixtures0 = require('../../example-src/components/simple-component.fixture.js')
   .default
