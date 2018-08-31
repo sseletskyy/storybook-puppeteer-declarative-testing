@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer') // eslint-disable-line import/no-extraneous-dependencies
 const fs = require('fs')
-const mkdirp = require('mkdirp') // eslint-disable-line import/no-extraneous-dependencies
 const os = require('os')
 const path = require('path')
 
@@ -17,6 +16,6 @@ module.exports = async function setup() {
   // This global is not available inside tests but only in global teardown
   global.__BROWSER_GLOBAL__ = browser // eslint-disable-line no-underscore-dangle
   // Instead, we expose the connection details via file system to be used in tests
-  mkdirp.sync(DIR)
+  fs.mkdirSync(DIR)
   fs.writeFileSync(path.join(DIR, 'wsEndpoint'), browser.wsEndpoint())
 }

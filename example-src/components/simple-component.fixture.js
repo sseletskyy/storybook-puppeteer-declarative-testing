@@ -4,7 +4,7 @@ export default {
       title: 'Component Title',
       children: 'Some children components',
     },
-    e2e: {
+    spdt: {
       checkSelector: 'div.simple-component',
     },
   },

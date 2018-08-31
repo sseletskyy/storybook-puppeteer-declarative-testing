@@ -1,7 +1,5 @@
 #! /usr/bin/env node
 
-//const [, , ...args] = process.argv
-//console.log(`BEGIN: generate story index: args = ${args}`)
 const shell = require('shelljs')
 const { generateStoryIndex } = require('../lib/story-index-generator')
 const { PACKAGE_JSON_CONFIG_KEY } = require('../lib/config')
@@ -15,8 +13,6 @@ if (either.isLeft()) {
   }
   shell.exit(1)
 } else {
-  shell.echo(`Story files found: ${either.right().length}\nDone`)
+  shell.echo(`Story files found: ${either.right().length}`)
   shell.exit()
 }
-
-//console.log('END: generate story index')

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react' //eslint-disable-line
 
 export default function(props) {
   const { title, children } = props

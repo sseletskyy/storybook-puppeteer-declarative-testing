@@ -1,7 +1,5 @@
 #! /usr/bin/env node
 
-//const [, , ...args] = process.argv
-//console.log(`BEGIN: generate story index: args = ${args}`)
 const shell = require('shelljs')
 const path = require('path')
 const { getConfig } = require('../lib/config')
