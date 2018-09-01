@@ -7,7 +7,6 @@ const {
   testCheckArcs,
   testCheckBars,
   testCheckSvg,
-  testCheckSelector,
   testCheckAxes,
   saveFile,
 } = require('../lib/test-generator')
@@ -164,30 +163,15 @@ test('testCheckSvg: when declaration is set should return generated it test', (t
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
 })
-test('testCheckSelector: when declaration not set should return empty string', (t) => {
-  const fixture = {}
-  const actual = testCheckSelector(fixture)
-  const expected = null
-  t.is(actual, expected)
-})
-
-test('testCheckSelector: when declaration is set should return generated it test', (t) => {
-  const checkSelector = 'div.className'
-  const fixture = {
-    props: {
-      data: [1, 2, 3],
-    },
-    spdt: { checkSelector },
-  }
-  const actual = testCheckSelector(fixture)
-  const expectedItTitle = `it('should load component matching selector [${checkSelector}]'`
-  const expectedSelector = `const components = await iFrame.$$('${checkSelector}')`
-  t.true(actual.includes(expectedItTitle))
-  t.true(actual.includes(expectedSelector))
-})
 
 test('saveFile: when path is incorrect should put error to debug logger', (t) => {
   const incorrectFile = path.resolve(__dirname, 'non-existed-dir', 'test-file-to.save')
+  const content = 'test content'
+  saveFile(incorrectFile, content)
+  t.pass()
+})
+test('saveFile: when path is correct should put saved file to debug logger', (t) => {
+  const incorrectFile = path.resolve(__dirname, 'e2e', 'test-file-to.save')
   const content = 'test content'
   saveFile(incorrectFile, content)
   t.pass()
