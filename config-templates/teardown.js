@@ -1,4 +1,5 @@
 /* eslint-disable */
+const fs = require('fs')
 const os = require('os')
 const path = require('path')
 
@@ -21,7 +22,7 @@ function rimraf(dirPath) {
 
 module.exports = async function teardown() {
   console.log('Teardown Puppeteer')
-  await global.__BROWSER_GLOBAL__.close()
+  await global.SPDT_BROWSER.close()
   rimraf(DIR)
 }
 /* eslint-enable */

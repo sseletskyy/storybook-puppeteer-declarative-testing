@@ -2,7 +2,11 @@
 
 const shell = require('shelljs')
 const path = require('path')
-const { getConfig, generateConfigForPackageJson, generateScriptsForPackageJson, SPDT_DIR } = require('../lib/config')
+const {
+  getConfig,
+  /*generateConfigForPackageJson,*/ generateScriptsForPackageJson,
+  SPDT_DIR,
+} = require('../lib/config')
 
 function insertInto(content) {
   shell.echo(`Insert it into your package.json\n-----\n`)
@@ -10,9 +14,9 @@ function insertInto(content) {
   shell.echo(`\n-----\n`)
 }
 
-function echoConfigForPackageJson() {
-  insertInto(generateConfigForPackageJson())
-}
+// function echoConfigForPackageJson() {
+//   insertInto(generateConfigForPackageJson())
+// }
 
 function echoScriptsForPackageJson() {
   insertInto(generateScriptsForPackageJson())
@@ -37,7 +41,7 @@ function init() {
   const projectDir = path.resolve(config.projectRoot)
   const dest = mkDir(projectDir, SPDT_DIR)
 
-  echoConfigForPackageJson()
+  // echoConfigForPackageJson()
   echoScriptsForPackageJson()
   const configsSource = path.resolve(__dirname, '../config-templates')
   copyConfigFilesToProject(configsSource, dest)

@@ -14,8 +14,14 @@ module.exports = async function setup() {
   }
   const browser = await puppeteer.launch(options)
   // This global is not available inside tests but only in global teardown
-  global.__BROWSER_GLOBAL__ = browser // eslint-disable-line no-underscore-dangle
+  global.SPDT_BROWSER = browser
   // Instead, we expose the connection details via file system to be used in tests
-  fs.mkdirSync(DIR)
+  try {
+    fs.mkdirSync(DIR)
+  } catch (e) {
+    if (e.code !== 'EEXIST') {
+      throw e
+    }
+  }
   fs.writeFileSync(path.join(DIR, 'wsEndpoint'), browser.wsEndpoint())
 }
