@@ -3,19 +3,19 @@ Declarative testing of isolated React components using storybook as a renderer a
 
 The idea behind this module is to make testing of React+D3 components based on fixtures.
 
-## Here is a a short description of the workflow:
+## Here is a short description of the workflow:
 
 * create a React component, e.g `Comment.js`
 * create a fixture file with a set of properties for your component: `Comment.fixture.js`
-* create a story file `Comment.story.js` which is used by Storybook to generate versions of your component based on fixture file: 
+* create a story file `Comment.story.js` which is used by Storybook to generate versions of your component based on fixture file:
 * run `node_modules/.bin/spdt:generate-story-index` to generate `.spdt/index.js` file for Storybook
 * add asserts/expectations for the component in fixture file (see examples below)
-* run `node_modules/.bin/spdt:generate-test-index` to generate `.spdt/test-index.generated.js` file. 
+* run `node_modules/.bin/spdt:generate-test-index` to generate `.spdt/test-index.generated.js` file.
 * run `node_modules/.bin/spdt:generate-tests` to generate test files for each React component (which has story and fixture files), e.g. `Comment.generated.spdt.js`
 * run Storybook server `npm run spdt:storybook`
 * run generated tests using jest + puppeteer `npm run spdt:test` (in another terminal tab)
 
-## How to install **spdt** 
+## How to install **spdt**
 
 * Install it from npm `npm i -D spdt`
 * Run initialization `node_modules/.bin/spdt:init` It will copy config files (jest, puppeteer, storybook) to predefined folder (by default `./spdt` )
@@ -112,9 +112,9 @@ export default (storyGenerator) =>
 
 Now run `npm run spdt` to call four commands sequencially
 * `spdt:generate-story-index` - it will generate `./.spdt/index.js` for Storybook
-* `spdt:generate-test-index` - it will generate a `./.spdt/test-index.generated.js` for TestGenerator 
+* `spdt:generate-test-index` - it will generate a `./.spdt/test-index.generated.js` for TestGenerator
 * `spdt:generate-tests` - it will generate `<your component name>.generated.spdt.js` files based on pairs (story.js + fixture.js)
-* `spdt:storybook` - it will run Storybook server, available at http://localhost:9009 
+* `spdt:storybook` - it will run Storybook server, available at http://localhost:9009
 
 If everything went well and Storybook started to work you can run generated tests
 ```
@@ -186,7 +186,7 @@ export default {
 ```
 
 
-A file `Comment.story.js` inside of `__tests__` folder 
+A file `Comment.story.js` inside of `__tests__` folder
 
 ```
 import React from 'react'
@@ -282,7 +282,7 @@ Value can be of `Boolean` type
 
 Value can be of `Number` type
 
-* value means number of expected axes of D3 chart based on selector `g.axis`
+* value means the number of expected axes of D3 chart based on selector `g.axis`
 
 ```
     it('should have ${checkAxes} axes', async () => {
@@ -300,7 +300,7 @@ Value can be of `Boolean` type
 * value `false` means that `it` test won't be generated
 
 ```
-    it('should have ${checkBarsValue} bars according to fixure data', async () => {
+    it('should have ${checkBarsValue} bars according to fixture data', async () => {
       const bars = await iFrame.$$('rect.bar')
       const expected = ${checkBarsValue} // fixture.props.data.length
       expect(bars).toHaveLength(expected)
@@ -315,7 +315,7 @@ Value can be of `Boolean` type
 * value `false` means that `it` test won't be generated
 
 ```
-    it('should have ${checkArcsValue} arcs according to fixure data', async () => {
+    it('should have ${checkArcsValue} arcs according to fixture data', async () => {
       const arcs = await iFrame.$$('path.arc')
       const expected = ${checkArcsValue} // fixture.props.data.length
       expect(arcs).toHaveLength(expected)
@@ -326,7 +326,5 @@ Value can be of `Boolean` type
 
 This feature will be available in upcoming release
 
-Meanwhile you can create your own `[component].spdt.js` files with custom implementation.
+Meanwhile, you can create your own `[component].spdt.js` files with a custom implementation.
 But don't change `*.generated.spdt.js` files because they are regenerated every time you run `npm run spdt:generate-tests`
-
-

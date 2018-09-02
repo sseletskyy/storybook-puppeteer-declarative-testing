@@ -92,7 +92,7 @@ test('testCheckArcs: when declaration is set should return generated it test', (
     spdt: { checkArcs: true },
   }
   const actual = testCheckArcs(fixture)
-  const expectedItTitle = `it('should have ${fixture.props.data.length} arcs according to fixure data'`
+  const expectedItTitle = `it('should have ${fixture.props.data.length} arcs according to fixture data'`
   const expectedSelector = `const arcs = await iFrame.$$('path.arc')`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
@@ -137,7 +137,7 @@ test('testCheckBars: when declaration is set should return generated it test', (
     spdt: { checkBars: true },
   }
   const actual = testCheckBars(fixture)
-  const expectedItTitle = `it('should have ${fixture.props.data.length} bars according to fixure data'`
+  const expectedItTitle = `it('should have ${fixture.props.data.length} bars according to fixture data'`
   const expectedSelector = `const bars = await iFrame.$$('rect.bar')`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
