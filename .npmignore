@@ -1,2 +1,3 @@
 tests
 example-src
+.nyc_output
