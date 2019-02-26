@@ -32,6 +32,9 @@ The idea behind this module is to make testing of React+D3 components based on f
     "spdt": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook"
 ```
 
+## Which npm modules need to be installed 
+* @babel/node (is used for generating test files)
+* @babel/core
 ## How to use
 
 For example you have a react component like this
