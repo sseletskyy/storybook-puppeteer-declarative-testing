@@ -67,6 +67,13 @@ test(`generateContent: check generated describe page.goto url`, (t) => {
   t.true(content[DESCRIBE_INDEX].includes(expected))
 })
 
+test(`generateContent: check customDeclarativeTest it title`, (t) => {
+  const { content, fixtureName: fn } = setup()
+  const value = fixtures[fn].spdt.customDeclarativeTest
+  const expected = `should find component matching selector [h1] with value ${value}`
+  t.true(content[DESCRIBE_INDEX].includes(expected))
+})
+
 test('testGenerator', (t) => {
   testGenerator({
     fixtures,

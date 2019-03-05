@@ -35,12 +35,13 @@ The idea behind this module is to make testing of React+D3 components based on f
 ## Which npm modules need to be installed 
 * @babel/node (is used for generating test files)
 * @babel/core
+* jest-puppeteer
 ## How to use
 
 For example you have a react component like this
 
 ```
-// src/components/SimpleComponent.js
+// src/components/SimpleComponent+.js
 
 import React from 'react'
 
