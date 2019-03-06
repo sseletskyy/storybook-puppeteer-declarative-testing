@@ -1,5 +1,8 @@
 const test = require('ava')
-const { testCheckSelector } = require('../../lib/test-generator')
+const {
+  testCheckSelector,
+  ROOT_SELECTOR,
+} = require('../../lib/test-generator')
 
 test('when declaration not set should return null', (t) => {
   const fixture = {}
@@ -29,8 +32,8 @@ test('when declaration is a string should return one generated it test with expe
     spdt: { checkSelector },
   }
   const actual = testCheckSelector(fixture)
-  const expectedItTitle = `it('should find component matching selector [${checkSelector}] 1 time(s)'`
-  const expectedSelector = `const components = await iFrame.$$('${checkSelector}')`
+  const expectedItTitle = `it('checkSelector: should find component matching selector [${checkSelector}] 1 time(s)'`
+  const expectedSelector = `const components = await iFrame.$$('${ROOT_SELECTOR} ${checkSelector}')`
   const expectedExpected = `const expected = 1`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
@@ -58,10 +61,10 @@ test('when declaration is an object should return one generated it test with exp
     spdt: { checkSelector },
   }
   const actual = testCheckSelector(fixture)
-  const expectedItTitle = `it('should find component matching selector [${checkSelector.selector}] ${
+  const expectedItTitle = `it('checkSelector: should find component matching selector [${checkSelector.selector}] ${
     checkSelector.length
   } time(s)'`
-  const expectedSelector = `const components = await iFrame.$$('${checkSelector.selector}')`
+  const expectedSelector = `const components = await iFrame.$$('${ROOT_SELECTOR} ${checkSelector.selector}')`
   const expectedExpected = `const expected = ${checkSelector.length}`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
@@ -81,10 +84,10 @@ test('when declaration is an array should return array.length generated it tests
   t.true(Array.isArray(actual))
   t.is(actual.length, expectedLength)
 
-  const expectedItTitleFirst = `it('should find component matching selector [${checkSelector[0].selector}] ${
+  const expectedItTitleFirst = `it('checkSelector: should find component matching selector [${checkSelector[0].selector}] ${
     checkSelector[0].length
   } time(s)'`
-  const expectedItTitleSecond = `it('should find component matching selector [${checkSelector[1]}] 1 time(s)'`
+  const expectedItTitleSecond = `it('checkSelector: should find component matching selector [${checkSelector[1]}] 1 time(s)'`
   t.true(actual[0].includes(expectedItTitleFirst))
   t.true(actual[1].includes(expectedItTitleSecond))
 })

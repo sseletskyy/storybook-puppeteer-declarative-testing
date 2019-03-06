@@ -6,6 +6,7 @@ export default {
     },
     spdt: {
       checkSelector: 'div.simple-component',
+      customDeclarativeTest: 'Component Title',
     },
   },
 }

@@ -23,7 +23,7 @@ function echoScriptsForPackageJson() {
 }
 
 function copyConfigFilesToProject(source, dest) {
-  const command = `cp -r ${source}/*.* ${dest}`
+  const command = `cp -r ${source}/ ${dest}`
   shell.exec(command)
   shell.echo(`Copied jest-puppeteer config files to ${dest}`)
   return true

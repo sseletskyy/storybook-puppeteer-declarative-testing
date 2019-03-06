@@ -9,6 +9,7 @@ const {
   testCheckSvg,
   testCheckAxes,
   saveFile,
+  ROOT_SELECTOR,
 } = require('../lib/test-generator')
 const { STORYBOOK_PORT } = require('../lib/config')
 const fixtures = require('../example-src/components/simple-component.fixture.js').default
@@ -67,6 +68,13 @@ test(`generateContent: check generated describe page.goto url`, (t) => {
   t.true(content[DESCRIBE_INDEX].includes(expected))
 })
 
+test(`generateContent: check customDeclarativeTest it title`, (t) => {
+  const { content, fixtureName: fn } = setup()
+  const value = fixtures[fn].spdt.customDeclarativeTest
+  const expected = `should find component matching selector [h1] with value ${value}`
+  t.true(content[DESCRIBE_INDEX].includes(expected))
+})
+
 test('testGenerator', (t) => {
   testGenerator({
     fixtures,
@@ -92,8 +100,8 @@ test('testCheckArcs: when declaration is set should return generated it test', (
     spdt: { checkArcs: true },
   }
   const actual = testCheckArcs(fixture)
-  const expectedItTitle = `it('should have ${fixture.props.data.length} arcs according to fixture data'`
-  const expectedSelector = `const arcs = await iFrame.$$('path.arc')`
+  const expectedItTitle = `it('checkArcs: should have ${fixture.props.data.length} arcs according to fixture data'`
+  const expectedSelector = `const arcs = await iFrame.$$('${ROOT_SELECTOR} path.arc')`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
 })
@@ -114,8 +122,8 @@ test('testCheckAxes: when declaration is set should return generated it test', (
     spdt: { checkAxes },
   }
   const actual = testCheckAxes(fixture)
-  const expectedItTitle = `it('should have ${checkAxes} axes'`
-  const expectedSelector = `const axes = await iFrame.$$('g.axis')`
+  const expectedItTitle = `it('checkAxes: should have ${checkAxes} axes'`
+  const expectedSelector = `const axes = await iFrame.$$('${ROOT_SELECTOR} g.axis')`
   const expectedValue = `const expected = ${checkAxes}`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
@@ -137,8 +145,8 @@ test('testCheckBars: when declaration is set should return generated it test', (
     spdt: { checkBars: true },
   }
   const actual = testCheckBars(fixture)
-  const expectedItTitle = `it('should have ${fixture.props.data.length} bars according to fixture data'`
-  const expectedSelector = `const bars = await iFrame.$$('rect.bar')`
+  const expectedItTitle = `it('checkBars: should have ${fixture.props.data.length} bars according to fixture data'`
+  const expectedSelector = `const bars = await iFrame.$$('${ROOT_SELECTOR} rect.bar')`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
 })
@@ -158,7 +166,7 @@ test('testCheckSvg: when declaration is set should return generated it test', (t
     spdt: { checkSvg: true },
   }
   const actual = testCheckSvg(fixture)
-  const expectedItTitle = `it('should load component as <svg>'`
+  const expectedItTitle = `it('checkSvg: should load component as <svg>'`
   const expectedSelector = `const component = await iFrame.$('svg')`
   t.true(actual.includes(expectedItTitle))
   t.true(actual.includes(expectedSelector))
