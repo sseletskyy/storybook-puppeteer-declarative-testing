@@ -1,3 +1,5 @@
+[![Codeship Status for sseletskyy/storybook-puppeteer-declarative-testing](https://app.codeship.com/projects/68070880-222e-0137-f223-6a5a7fbcefce/status?branch=master)](https://app.codeship.com/projects/329679)
+
 # SPDT
 Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner
 
