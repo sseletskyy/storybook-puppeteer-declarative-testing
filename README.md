@@ -1,7 +1,9 @@
 # SPDT - Storybook Puppeteer Declarative Testing
 <p align="center">
-  [![Codeship Status for sseletskyy/storybook-puppeteer-declarative-testing](https://app.codeship.com/projects/68070880-222e-0137-f223-6a5a7fbcefce/status?branch=master)](https://app.codeship.com/projects/329679)
-
+  <a href="https://app.codeship.com/projects/329679">
+    <img src="https://app.codeship.com/projects/68070880-222e-0137-f223-6a5a7fbcefce/status?branch=master"
+      alt="Codeship Status for sseletskyy/storybook-puppeteer-declarative-testing">
+  </a>
   <a href="https://www.npmjs.com/package/spdt">
     <img src="https://img.shields.io/npm/v/spdt.svg"
          alt="npm version">
