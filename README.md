@@ -1,6 +1,27 @@
-[![Codeship Status for sseletskyy/storybook-puppeteer-declarative-testing](https://app.codeship.com/projects/68070880-222e-0137-f223-6a5a7fbcefce/status?branch=master)](https://app.codeship.com/projects/329679)
+# SPDT - Storybook Puppeteer Declarative Testing
+<p align="center">
+  [![Codeship Status for sseletskyy/storybook-puppeteer-declarative-testing](https://app.codeship.com/projects/68070880-222e-0137-f223-6a5a7fbcefce/status?branch=master)](https://app.codeship.com/projects/329679)
 
-# SPDT
+  <a href="https://www.npmjs.com/package/spdt">
+    <img src="https://img.shields.io/npm/v/spdt.svg"
+         alt="npm version">
+  </a>
+  <a href="https://packagephobia.now.sh/result?p=spdt">
+    <img src="https://packagephobia.now.sh/badge?p=spdt"
+         alt="install size">
+  </a>
+  <a href="https://github.com/sseletskyy/storybook-puppeteer-declarative-testing/blob/master/LICENSE.md">
+    <img src="https://img.shields.io/npm/l/spdt.svg"
+         alt="license">
+  </a>
+  <a href="https://david-dm.org/sseletskyy/storybook-puppeteer-declarative-testing">
+    <img src="https://david-dm.org/sseletskyy/storybook-puppeteer-declarative-testing/status.svg"
+         alt="dependency status">
+  </a>
+</p>
+
+
+# Overview
 Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner
 
 The idea behind this module is to make testing of React+D3 components based on fixtures.
@@ -35,9 +56,13 @@ The idea behind this module is to make testing of React+D3 components based on f
 ```
 
 ## Which npm modules need to be installed 
+* @storybook/react@5.x
 * @babel/node (is used for generating test files)
 * @babel/core
-* jest-puppeteer
+* puppeteer@^1.13.0
+* jest-puppeteer@^4.0.0
+* react@16.x 
+
 ## How to use
 
 For example you have a react component like this
@@ -249,10 +274,19 @@ Teardown Test Environment.
 ```
 
 
-## SPDT Assertions
+## SPDT Declarations
 
-Use these assertions as keys in fixtures -> [fixture name] -> spdt
-
+Use these declarations as keys in fixtures 
+```
+export default {
+  [fixture name]: {
+    props: { ... },
+    spdt: {
+      [declaration name]: [declaration value]
+    }
+  }
+}
+```
 ### checkSelector
 
 Value can be
@@ -328,9 +362,12 @@ Value can be of `Boolean` type
     })`
 ```
 
-### custom assertions
+### Custom Declarations
+When you run initialization `node_modules/.bin/spdt:init`
+it creates the file *test-declarations.js*  and a directory *custom-declarations* in the folder *.spdt*
+Use the example *testH1* declaration as a guideline to add more custom declarations 
 
-This feature will be available in upcoming release
-
-Meanwhile, you can create your own `[component].spdt.js` files with a custom implementation.
-But don't change `*.generated.spdt.js` files because they are regenerated every time you run `npm run spdt:generate-tests`
+General requirements
+* The file *test-declarations.js* should export an object. 
+* The key of the object is the name of a custom declaration
+* The value is a function which takes a fixture and returns a string - generated it test for puppeteer+jest environment 

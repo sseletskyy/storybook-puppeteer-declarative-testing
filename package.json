@@ -1,6 +1,6 @@
 {
   "name": "spdt",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "spdt stands for Storybook Puppeteer Declarative Testing. Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner",
   "main": "index.js",
   "bin": {
@@ -10,10 +10,10 @@
     "spdt:init": "./bin/init.js"
   },
   "scripts": {
-    "lint": "eslint ./**/*.js",
-    "flint": "eslint ./**/*.js  --fix",
-    "test": "NODE_ENV=AVA ava",
-    "test:cover": "nyc npm run test",
+    "lint": "eslint ./lib/*.js ./tests/*.js",
+    "flint": "eslint ./lib/*.js ./tests/*.js --fix",
+    "test": "jest",
+    "test:cover": "jest --coverage",
     "tc": "npm run test:cover"
   },
   "repository": {
@@ -41,66 +41,32 @@
   },
   "homepage": "https://github.com/sseletskyy/storybook-puppeteer-declarative-testing#readme",
   "peerDependencies": {
-    "react": "16.x",
-    "@storybook/react": "4.x"
+    "@storybook/react": "5.x",
+    "jest-puppeteer": "^4.0.0",
+    "puppeteer": "^1.13.0",
+    "react": "16.x"
   },
   "dependencies": {
-    "debug": "^3.1.0",
-    "fs": "^0.0.1-security",
-    "monet": "^0.8.10",
+    "debug": "^4.1.0",
+    "fs": "^0.0.2",
+    "monet": "^0.9.0",
     "path": "^0.12.7",
     "prompt": "^1.0.0",
-    "puppeteer": "^1.7.0",
-    "ramda": "^0.25.0",
-    "shelljs": "^0.8.2"
+    "ramda": "^0.26.1",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-jsx": "^7.2.0",
-    "ava": "^1.2.1",
-    "babel-eslint": "8.1.2",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-register": "^6.26.0",
-    "eslint": "4.13.1",
-    "eslint-config-airbnb": "^16.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-loader": "2.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.18.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.10.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "nyc": "^13.3.0",
-    "prettier": "^1.14.2"
-  },
-  "ava": {
-    "babel": {
-      "testOptions": {
-        "plugins": [
-          "@babel/plugin-syntax-jsx"
-        ],
-        "babelrc": false,
-        "configFile": false
-      }
-    },
-    "concurrency": 2,
-    "files": [
-      "tests/**/*.ava.js"
-    ],
-    "verbose": true,
-    "require": [
-      "babel-register"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "react",
-      "stage-0"
-    ]
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-eslint": "10.0.1",
+    "babel-jest": "^24.1.0",
+    "eslint": "5.15.1",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.1.0",
+    "prettier": "^1.16.4"
   },
   "prettier": {
     "printWidth": 120,
