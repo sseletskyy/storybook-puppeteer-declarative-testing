@@ -1,14 +1,11 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "airbnb",
     "plugin:prettier/recommended",
-    "plugin:react/recommended",
     "prettier",
-    "prettier/react",
     "prettier/standard"
   ],
-  "plugins": ["react", "prettier", "standard", "jest"],
+  "plugins": ["prettier", "jest"],
   "env": {
     "node": true,
     "browser": true,
@@ -45,13 +42,7 @@
     "func-names": [0],
     "no-else-return": [0],
     "no-unused-vars": [2, { "vars": "all", "args": "none" }],
-    "react/display-name": [0],
-    "react/prop-types": [0],
-    "react/jsx-indent-props": [0],
-    "react/jsx-indent": [0],
-    "react/jsx-filename-extension": [0],
     "object-shorthand": [1],
-    "react/prefer-stateless-function": [0],
     "no-bitwise": [1],
     "no-mixed-operators": [0],
     "no-plusplus": [1, { "allowForLoopAfterthoughts": true }],
