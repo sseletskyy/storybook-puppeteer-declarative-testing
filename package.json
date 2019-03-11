@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/sseletskyy/storybook-puppeteer-declarative-testing#readme",
   "peerDependencies": {
-    "@storybook/react": "5.x",
+    "@storybook/react": "4.x",
     "jest-puppeteer": "^4.0.0",
     "puppeteer": "^1.13.0",
     "react": "16.x"

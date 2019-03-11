@@ -58,7 +58,7 @@ The idea behind this module is to make testing of React+D3 components based on f
 ```
 
 ## Which npm modules need to be installed 
-* @storybook/react@5.x
+* @storybook/react@4.x
 * @babel/node (is used for generating test files)
 * @babel/core
 * puppeteer@^1.13.0
