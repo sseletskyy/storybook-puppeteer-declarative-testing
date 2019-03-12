@@ -4,6 +4,7 @@
     <img src="https://app.codeship.com/projects/68070880-222e-0137-f223-6a5a7fbcefce/status?branch=master"
       alt="Codeship Status for sseletskyy/storybook-puppeteer-declarative-testing">
   </a>
+  <a href='https://coveralls.io/github/sseletskyy/storybook-puppeteer-declarative-testing?branch=master'><img src='https://coveralls.io/repos/github/sseletskyy/storybook-puppeteer-declarative-testing/badge.svg?branch=master' alt='Coverage Status' /></a>
   <a href="https://www.npmjs.com/package/spdt">
     <img src="https://img.shields.io/npm/v/spdt.svg"
          alt="npm version">
@@ -59,8 +60,9 @@ The idea behind this module is to make testing of React+D3 components based on f
 
 ## Which npm modules need to be installed 
 * @storybook/react@4.x
-* @babel/node (is used for generating test files)
-* @babel/core
+* @babel/node@^7.2 (@babel libs are used for generating test files)
+* @babel/core@^7.3
+* @babel/plugin-transform-runtime@^7.3
 * puppeteer@^1.13.0
 * jest-puppeteer@^4.0.0
 * react@16.x 

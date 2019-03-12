@@ -13,7 +13,7 @@
     "lint": "eslint ./lib/*.js ./tests/*.js",
     "flint": "eslint ./lib/*.js ./tests/*.js --fix",
     "test": "jest",
-    "test:cover": "jest --coverage",
+    "test:cover": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "tc": "npm run test:cover"
   },
   "repository": {
@@ -60,6 +60,7 @@
     "@babel/preset-env": "^7.3.4",
     "babel-eslint": "10.0.1",
     "babel-jest": "^24.1.0",
+    "coveralls": "^3.0.3",
     "eslint": "5.15.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.16.0",
