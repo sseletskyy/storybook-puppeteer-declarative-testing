@@ -25,10 +25,74 @@
 
 
 # Overview
-Declarative testing of isolated React components using storybook (v4) as a renderer and puppeteer+jest as a test runner
+Declarative testing of isolated React components using storybook (v4) as a renderer and puppeteer+jest as a test runner.
+
+It's not yet another testing framework. It's just the way how to implement DRY (don't repeat yourself) principle for testing React components.
+
+* write a fixture - props for React component
+* add a declaration - a single line which describes what to test
+* write a simple storybook story
+* call **npm run spdt** to generate tests and run storybook server
+* call **npm run spdt:test** to run generated jest tests - puppeteer reads react components in storybook and calls assertions
+
+Here is an example.
+
+We have a React component to display a list of products.
+```javascript
+// file: src/example/ProductList.jsx
+const ProductList = ({list}) => (
+  <div>
+    {list.map((item, index) => <div key={index} className="itemElement">{item}</div>)}
+  </div>
+)
+export default ProductList
+```
+We have some testing data (fixture) to render: `['apricot', 'banana', 'carrot']`
+We need to write a test to check that three items (with class .itemElement) will be rendered.
+Let's write a fixture in such a form:
+```javascript
+// file: src/example/__tests__/ProductList.fixture.js
+export default {
+  listOfThree: {
+    props: {
+      items: ['apricot', 'banana', 'carrot']
+    },
+    spdt: {
+      checkSelector: {selector: '.itemElement', length: 3} // <----
+    }
+  }
+}
+```
+That simple declaration `checkSelector: {selector: '.itemElement', length: 3}` makes **spdt** library to generate a test for you.
+No need to copy-paste unit tests any more.
+Just write a test pattern (declaration) once and reuse it over and over (see example **testH1**  below)
+
+You can add as many fixtures as you want:
+```javascript
+// file: src/example/__tests__/ProductList.fixture.js
+export default {
+  listOfThree: {
+    props: {
+      items: ['apricot', 'banana', 'carrot']
+    },
+    spdt: {
+      checkSelector: {selector: '.itemElement', length: 3} // <----
+    }
+  },
+  listOfTwo: {
+    props: {
+      items: ['orange', 'tangerine']
+    },
+    spdt: {
+      checkSelector: {selector: '.itemElement', length: 2} // <----
+    }
+  }
+}
+```
+
 
 The idea behind this module was to make testing of React+D3 components based on fixtures.
-But **spdt** can speed up testing of any React application
+However **spdt** can speed up testing of any React application
 
 ## Here is a short description of the workflow:
 
@@ -375,7 +439,7 @@ Use the example *testH1* declaration as a guideline to add more custom declarati
 General requirements
 * The file *test-declarations.js* should export an object. 
 * The key of the object is the name of a custom declaration
-* The value of the object is a function which takes a fixture and returns a string - generated **it** test for puppeteer+jest environment 
+* The value of the object is a function which takes a fixture and returns a string - generated **it** test for puppeteer+jest environment
 
 Example
 ```javascript
@@ -400,5 +464,5 @@ const declarationTestH1 = (fixture) => {
 
 module.exports = {
   testH1: declarationTestH1,
-} 
+}
 ```
