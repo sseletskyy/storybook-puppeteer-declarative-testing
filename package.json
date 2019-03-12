@@ -3,6 +3,12 @@
   "version": "1.1.3",
   "description": "spdt stands for Storybook Puppeteer Declarative Testing. Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner",
   "main": "index.js",
+  "files": [
+    "/bin",
+    "/config-templates",
+    "/lib",
+    "/index.js"
+  ],
   "bin": {
     "spdt:generate-story-index": "./bin/generate-story-index.js",
     "spdt:generate-test-index": "./bin/generate-test-index.js",
