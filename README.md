@@ -25,9 +25,10 @@
 
 
 # Overview
-Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner
+Declarative testing of isolated React components using storybook (v4) as a renderer and puppeteer+jest as a test runner
 
-The idea behind this module is to make testing of React+D3 components based on fixtures.
+The idea behind this module was to make testing of React+D3 components based on fixtures.
+But **spdt** can speed up testing of any React application
 
 ## Here is a short description of the workflow:
 
@@ -59,7 +60,7 @@ The idea behind this module is to make testing of React+D3 components based on f
 ```
 
 ## Which npm modules need to be installed 
-* @storybook/react@4.x
+* @storybook/react@4.x (storybook v5 is not supported yet due to backward incompatible changes in location address format)
 * @babel/node@^7.2 (@babel libs are used for generating test files)
 * @babel/core@^7.3
 * @babel/plugin-transform-runtime@^7.3
@@ -296,7 +297,7 @@ export default {
 Value can be
 * `string` , e.g. 'div.className'
 * `object` , e.g. {selector: 'div.className', length: 0}
-* `array` of strings of objects, e.g. ['div.className', {selector: 'li', length: 5}]
+* `array` of strings or objects, e.g. ['div.className', {selector: 'li', length: 5}]
 
 This assertion will generate a separate `it` test to check provided selector
 
@@ -374,4 +375,30 @@ Use the example *testH1* declaration as a guideline to add more custom declarati
 General requirements
 * The file *test-declarations.js* should export an object. 
 * The key of the object is the name of a custom declaration
-* The value is a function which takes a fixture and returns a string - generated it test for puppeteer+jest environment 
+* The value of the object is a function which takes a fixture and returns a string - generated **it** test for puppeteer+jest environment 
+
+Example
+```javascript
+const declarationTestH1 = (fixture) => {
+  const { testH1 } = (fixture && fixture.spdt) || {}
+  let selector
+  let value
+  if (typeof testH1 === 'string') {
+    selector = 'h1'
+    value = testH1
+  }
+  if (!selector || !value) {
+    return null
+  }
+  return `
+    it('testH1: should find component matching selector [${selector}] with value ${value}', async () => {
+      const components = await iFrame.$$eval('[id=root] ${selector}', elements => elements.map(e => e.innerText))
+      const expected = '${value}'
+      expect(components).toContain(expected)
+    })`
+}
+
+module.exports = {
+  testH1: declarationTestH1,
+} 
+```
