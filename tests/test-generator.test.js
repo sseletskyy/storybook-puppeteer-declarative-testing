@@ -1,6 +1,7 @@
 import path from 'path'
 import {
   generateContent,
+  generateItTests,
   getFileName,
   ROOT_SELECTOR,
   saveFile,
@@ -9,6 +10,7 @@ import {
   testCheckBars,
   testCheckSvg,
   testGenerator,
+  testCheckSelector,
 } from '../lib/test-generator'
 import { STORYBOOK_PORT } from '../lib/config'
 import fixtures from '../example-src/components/simple-component.fixture'
@@ -83,6 +85,19 @@ describe('Test Generator', () => {
       pathToTestIndex,
     })
     expect(true).toBeTruthy()
+  })
+  it('generateItTests: should correct compose tests', () => {
+    const fixture = {
+      props: {
+        title: 'Component Title',
+        children: 'Some children components',
+      },
+      spdt: {
+        checkSelector: ['div.simple-component', 'div.simple-component-item'],
+      },
+    }
+    const expected = testCheckSelector(fixture).join('')
+    expect(generateItTests(fixture)).toEqual(expected)
   })
 
   it('testCheckArcs: when declaration not set should return empty string', () => {
