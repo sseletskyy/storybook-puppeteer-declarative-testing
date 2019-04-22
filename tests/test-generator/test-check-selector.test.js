@@ -1,4 +1,4 @@
-import { ROOT_SELECTOR, testCheckSelector } from '../../lib/test-generator'
+import { testCheckSelector } from '../../lib/test-generator'
 import { describe, it, expect } from '../custom-jest'
 
 describe('Test Check Selector', function() {
@@ -31,7 +31,7 @@ describe('Test Check Selector', function() {
     }
     const actual = testCheckSelector(fixture)
     const expectedItTitle = `it('checkSelector: should find component matching selector [${checkSelector}] 1 time(s)'`
-    const expectedSelector = `const components = await iFrame.$$('${ROOT_SELECTOR} ${checkSelector}')`
+    const expectedSelector = `const components = await iFrame.$$('${checkSelector}')`
     const expectedExpected = `const expected = 1`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
@@ -62,7 +62,7 @@ describe('Test Check Selector', function() {
     const expectedItTitle = `it('checkSelector: should find component matching selector [${checkSelector.selector}] ${
       checkSelector.length
     } time(s)'`
-    const expectedSelector = `const components = await iFrame.$$('${ROOT_SELECTOR} ${checkSelector.selector}')`
+    const expectedSelector = `const components = await iFrame.$$('${checkSelector.selector}')`
     const expectedExpected = `const expected = ${checkSelector.length}`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()

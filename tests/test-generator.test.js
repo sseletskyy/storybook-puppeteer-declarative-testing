@@ -3,7 +3,6 @@ import {
   generateContent,
   generateItTests,
   getFileName,
-  ROOT_SELECTOR,
   saveFile,
   testCheckArcs,
   testCheckAxes,
@@ -116,7 +115,7 @@ describe('Test Generator', () => {
     }
     const actual = testCheckArcs(fixture)
     const expectedItTitle = `it('checkArcs: should have ${fixture.props.data.length} arcs according to fixture data'`
-    const expectedSelector = `const arcs = await iFrame.$$('${ROOT_SELECTOR} path.arc')`
+    const expectedSelector = `const arcs = await iFrame.$$('path.arc')`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
   })
@@ -138,7 +137,7 @@ describe('Test Generator', () => {
     }
     const actual = testCheckAxes(fixture)
     const expectedItTitle = `it('checkAxes: should have ${checkAxes} axes'`
-    const expectedSelector = `const axes = await iFrame.$$('${ROOT_SELECTOR} g.axis')`
+    const expectedSelector = `const axes = await iFrame.$$('g.axis')`
     const expectedValue = `const expected = ${checkAxes}`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
@@ -161,7 +160,7 @@ describe('Test Generator', () => {
     }
     const actual = testCheckBars(fixture)
     const expectedItTitle = `it('checkBars: should have ${fixture.props.data.length} bars according to fixture data'`
-    const expectedSelector = `const bars = await iFrame.$$('${ROOT_SELECTOR} rect.bar')`
+    const expectedSelector = `const bars = await iFrame.$$('rect.bar')`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
   })
