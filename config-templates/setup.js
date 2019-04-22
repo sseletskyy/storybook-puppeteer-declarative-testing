@@ -8,7 +8,10 @@ const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup')
 module.exports = async function setup() {
   const headless = process.env.HEADLESS !== 'false'
   const slowMoValue = Number(process.env.SLOWMO)
-  const options = { headless }
+  const options = {
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    headless,
+  }
   if (!Number.isNaN(slowMoValue) && !headless) {
     options.slowMo = slowMoValue
   }
