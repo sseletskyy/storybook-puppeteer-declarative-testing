@@ -23,6 +23,10 @@
   </a>
 </p>
 
+## TL;DR
+
+```npm i -D spdt```
+or ```yarn add spdt -D```
 
 # Overview
 Declarative testing of isolated React components using storybook (v4) as a renderer and puppeteer+jest as a test runner.
@@ -99,10 +103,10 @@ However **spdt** can speed up testing of any React application
 * create a React component, e.g `Comment.js`
 * create a fixture file with a set of properties for your component: `Comment.fixture.js`
 * create a story file `Comment.story.js` which is used by Storybook to generate versions of your component based on fixture file:
-* run `node_modules/.bin/spdt:generate-story-index` to generate `.spdt/index.js` file for Storybook
+* run `npm run spdt:generate-story-index` to generate `.spdt/index.js` file for Storybook
 * add asserts/expectations for the component in fixture file (see examples below)
-* run `node_modules/.bin/spdt:generate-test-index` to generate `.spdt/test-index.generated.js` file.
-* run `node_modules/.bin/spdt:generate-tests` to generate test files for each React component (which has story and fixture files), e.g. `Comment.generated.spdt.js`
+* run `npm run spdt:generate-test-index` to generate `.spdt/test-index.generated.js` file.
+* run `npm run spdt:generate-tests` to generate test files for each React component (which has story and fixture files), e.g. `Comment.generated.spdt.js`
 * run Storybook server `npm run spdt:storybook`
 * run generated tests using jest + puppeteer `npm run spdt:test` (in another terminal tab)
 
@@ -466,3 +470,24 @@ module.exports = {
   testH1: declarationTestH1,
 }
 ```
+
+## Continuous Integration workflow
+
+* make sure you have installed the module `start-server-and-test`
+
+```
+npm i -D start-server-and-test
+```
+* check `package.json` icludes these script commands
+```
+    "spdt:storybook:ci": "start-storybook --ci --quiet -p 9009 -c ./.spdt",
+    "spdt:ci": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook:ci",
+    "ci": "start-server-and-test spdt:ci 9009 spdt:test"
+```
+* just run `npm run ci`
+
+* module `start-server-and-test` does the magic:
+  * it executes `npm run spdt:ci`
+  * it listens when the port 9009 is available (storybook is up and running)
+  * it runs the tests `npm run spdt:test`
+  * it stops storybook when tests end

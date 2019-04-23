@@ -50,7 +50,8 @@
     "@storybook/react": "4.x",
     "jest-puppeteer": "^4.0.0",
     "puppeteer": "^1.13.0",
-    "react": "16.x"
+    "react": "16.x",
+    "start-server-and-test": "^1.7.13"
   },
   "dependencies": {
     "debug": "^4.1.0",
