@@ -65,7 +65,7 @@ describe('Test Generator', () => {
 
   it(`generateContent: check generated describe page.goto url`, () => {
     const { content, componentName: cn, fixtureName: fn } = setup()
-    const expected = `http://localhost:${STORYBOOK_PORT}/?selectedKind=${cn}&selectedStory=${fn}`
+    const expected = `http://localhost:${STORYBOOK_PORT}/iframe.html?path=/story/${cn.toLowerCase()}--${fn.toLowerCase()}`
     expect(content[DESCRIBE_INDEX].includes(expected)).toBeTruthy()
   })
 
@@ -115,7 +115,7 @@ describe('Test Generator', () => {
     }
     const actual = testCheckArcs(fixture)
     const expectedItTitle = `it('checkArcs: should have ${fixture.props.data.length} arcs according to fixture data'`
-    const expectedSelector = `const arcs = await iFrame.$$('path.arc')`
+    const expectedSelector = `const arcs = await page.$$('path.arc')`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
   })
@@ -137,7 +137,7 @@ describe('Test Generator', () => {
     }
     const actual = testCheckAxes(fixture)
     const expectedItTitle = `it('checkAxes: should have ${checkAxes} axes'`
-    const expectedSelector = `const axes = await iFrame.$$('g.axis')`
+    const expectedSelector = `const axes = await page.$$('g.axis')`
     const expectedValue = `const expected = ${checkAxes}`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
@@ -160,7 +160,7 @@ describe('Test Generator', () => {
     }
     const actual = testCheckBars(fixture)
     const expectedItTitle = `it('checkBars: should have ${fixture.props.data.length} bars according to fixture data'`
-    const expectedSelector = `const bars = await iFrame.$$('rect.bar')`
+    const expectedSelector = `const bars = await page.$$('rect.bar')`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
   })
@@ -181,7 +181,7 @@ describe('Test Generator', () => {
     }
     const actual = testCheckSvg(fixture)
     const expectedItTitle = `it('checkSvg: should load component as <svg>'`
-    const expectedSelector = `const component = await iFrame.$('svg')`
+    const expectedSelector = `const component = await page.$('svg')`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
   })

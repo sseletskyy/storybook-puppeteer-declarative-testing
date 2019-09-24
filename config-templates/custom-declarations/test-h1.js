@@ -11,7 +11,7 @@ const declarationTestH1 = (fixture) => {
   }
   return `
     it('testH1: should find component matching selector [${selector}] with value ${value}', async () => {
-      const components = await iFrame.$$eval('[id=root] ${selector}', elements => elements.map(e => e.innerText))
+      const components = await page.$$eval('[id=root] ${selector}', elements => elements.map(e => e.innerText))
       const expected = '${value}'
       expect(components).toContain(expected)
     })`

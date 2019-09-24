@@ -11,7 +11,7 @@ const testCustomDeclarativeTest = (fixture) => {
   }
   return `
     it('should find component matching selector [${selector}] with value ${value}', async () => {
-      const components = await iFrame.$$('${selector}')
+      const components = await page.$$('${selector}')
       const expected = 1
       expect(components).toHaveLength(expected)
     })`

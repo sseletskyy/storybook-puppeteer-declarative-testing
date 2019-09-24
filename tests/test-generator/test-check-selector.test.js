@@ -31,7 +31,7 @@ describe('Test Check Selector', function() {
     }
     const actual = testCheckSelector(fixture)
     const expectedItTitle = `it('checkSelector: should find component matching selector [${checkSelector}] 1 time(s)'`
-    const expectedSelector = `const components = await iFrame.$$('${checkSelector}')`
+    const expectedSelector = `const components = await page.$$('${checkSelector}')`
     const expectedExpected = `const expected = 1`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
@@ -59,10 +59,8 @@ describe('Test Check Selector', function() {
       spdt: { checkSelector },
     }
     const actual = testCheckSelector(fixture)
-    const expectedItTitle = `it('checkSelector: should find component matching selector [${checkSelector.selector}] ${
-      checkSelector.length
-    } time(s)'`
-    const expectedSelector = `const components = await iFrame.$$('${checkSelector.selector}')`
+    const expectedItTitle = `it('checkSelector: should find component matching selector [${checkSelector.selector}] ${checkSelector.length} time(s)'`
+    const expectedSelector = `const components = await page.$$('${checkSelector.selector}')`
     const expectedExpected = `const expected = ${checkSelector.length}`
     expect(actual.includes(expectedItTitle)).toBeTruthy()
     expect(actual.includes(expectedSelector)).toBeTruthy()
@@ -82,9 +80,7 @@ describe('Test Check Selector', function() {
     expect(Array.isArray(actual)).toBeTruthy()
     expect(actual.length).toEqual(expectedLength)
 
-    const expectedItTitleFirst = `it('checkSelector: should find component matching selector [${
-      checkSelector[0].selector
-    }] ${checkSelector[0].length} time(s)'`
+    const expectedItTitleFirst = `it('checkSelector: should find component matching selector [${checkSelector[0].selector}] ${checkSelector[0].length} time(s)'`
     const expectedItTitleSecond = `it('checkSelector: should find component matching selector [${
       checkSelector[1]
     }] 1 time(s)'`

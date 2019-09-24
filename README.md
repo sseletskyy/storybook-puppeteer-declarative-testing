@@ -371,7 +371,7 @@ This assertion will generate a separate `it` test to check provided selector
 
 ```
     it('should find component matching selector [div.card] 1 time(s)', async () => {
-      const components = await iFrame.$$('div.card')
+      const components = await page.$$('div.card')
       const expected = 1
       expect(components).toHaveLength(expected)
     }),
@@ -386,7 +386,7 @@ Value can be of `Boolean` type
 
 ```
     it('should load component as <svg>', async () => {
-      const component = await iFrame.$('svg')
+      const component = await page.$('svg')
       expect(component._remoteObject.description).toMatch('svg') // eslint-disable-line no-underscore-dangle
     })`
 ```
@@ -399,7 +399,7 @@ Value can be of `Number` type
 
 ```
     it('should have ${checkAxes} axes', async () => {
-      const axes = await iFrame.$$('g.axis')
+      const axes = await page.$$('g.axis')
       const expected = ${checkAxes}
       expect(axes).toHaveLength(expected)
     })`
@@ -414,7 +414,7 @@ Value can be of `Boolean` type
 
 ```
     it('should have ${checkBarsValue} bars according to fixture data', async () => {
-      const bars = await iFrame.$$('rect.bar')
+      const bars = await page.$$('rect.bar')
       const expected = ${checkBarsValue} // fixture.props.data.length
       expect(bars).toHaveLength(expected)
     })`
@@ -429,7 +429,7 @@ Value can be of `Boolean` type
 
 ```
     it('should have ${checkArcsValue} arcs according to fixture data', async () => {
-      const arcs = await iFrame.$$('path.arc')
+      const arcs = await page.$$('path.arc')
       const expected = ${checkArcsValue} // fixture.props.data.length
       expect(arcs).toHaveLength(expected)
     })`
@@ -460,7 +460,7 @@ const declarationTestH1 = (fixture) => {
   }
   return `
     it('testH1: should find component matching selector [${selector}] with value ${value}', async () => {
-      const components = await iFrame.$$eval('[id=root] ${selector}', elements => elements.map(e => e.innerText))
+      const components = await page.$$eval('[id=root] ${selector}', elements => elements.map(e => e.innerText))
       const expected = '${value}'
       expect(components).toContain(expected)
     })`

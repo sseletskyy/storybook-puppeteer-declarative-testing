@@ -66,3 +66,4 @@ typings/
 # files generated during test run
 tests/e2e/test-index.generated.ts
 tests/e2e/test-index.generated.js
+tests/e2e/test-file-to.save
