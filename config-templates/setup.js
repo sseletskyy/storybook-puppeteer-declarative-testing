@@ -3,7 +3,7 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 
-const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup')
+const DIR = process.env.DIR || path.join(os.tmpdir(), 'jest_puppeteer_global_setup')
 
 module.exports = async function setup() {
   const headless = process.env.HEADLESS !== 'false'
