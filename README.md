@@ -377,6 +377,12 @@ This assertion will generate a separate `it` test to check provided selector
     }),
 ```
 
+### checkAttr
+
+Value can be
+* `object`, with required keys { selector: 'div.className', expected: 'value-of-attribute', attribute: 'name-of-attribute'}
+* `array` of objects, e.g. `[{selector:'div', expected:'x', attribute:'y'}]`
+
 ### checkSvg
 
 Value can be of `Boolean` type
@@ -491,3 +497,16 @@ npm i -D start-server-and-test
   * it listens when the port 9009 is available (storybook is up and running)
   * it runs the tests `npm run spdt:test`
   * it stops storybook when tests end
+
+## New features
+
+Check out `helpers` folder with several high order functions
+* withParent - simple way to wrap a component with a `div` tag with some css styles
+* withRouter - it wraps a component with Router from `react-router-dom`
+* withStoreFromFixture - simple way to provide some values to redux store from the fixture
+* withTheme - a wrapper in case you use material-ui
+
+Check out new custom declarations in `custom-declarations` folder
+* checkInnerText
+* checkInnerTexts
+* checkValue
