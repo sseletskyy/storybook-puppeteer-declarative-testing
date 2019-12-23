@@ -44,7 +44,6 @@ testGenerator({
         '../example-src/components/simple-component.story.js',
       ),
     ]
-    expect(actual.isRight()).toBeTruthy()
     expect(actual.right()).toEqual(expected)
   })
 })
