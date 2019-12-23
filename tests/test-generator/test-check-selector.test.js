@@ -81,9 +81,7 @@ describe('Test Check Selector', function() {
     expect(actual.length).toEqual(expectedLength)
 
     const expectedItTitleFirst = `it('checkSelector: should find component matching selector [${checkSelector[0].selector}] ${checkSelector[0].length} time(s)'`
-    const expectedItTitleSecond = `it('checkSelector: should find component matching selector [${
-      checkSelector[1]
-    }] 1 time(s)'`
+    const expectedItTitleSecond = `it('checkSelector: should find component matching selector [${checkSelector[1]}] 1 time(s)'`
     expect(actual[0].includes(expectedItTitleFirst)).toBeTruthy()
     expect(actual[1].includes(expectedItTitleSecond)).toBeTruthy()
   })

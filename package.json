@@ -79,7 +79,7 @@
     "prettier": "^1.19.1"
   },
   "prettier": {
-    "printWidth": 120,
+    "printWidth": 80,
     "parser": "babel",
     "semi": false,
     "tabWidth": 2,

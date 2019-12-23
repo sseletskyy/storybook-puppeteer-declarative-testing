@@ -1,5 +1,8 @@
 import path from 'path'
-import { generateContentForStoryIndex, generateStoryIndex } from '../lib/story-index-generator'
+import {
+  generateContentForStoryIndex,
+  generateStoryIndex,
+} from '../lib/story-index-generator'
 import { describe, it, expect } from './custom-jest'
 
 describe('Story Index Generator', function() {
@@ -7,7 +10,10 @@ describe('Story Index Generator', function() {
 when pathToStories is two levels deep`, () => {
     const pathToSrc = `${__dirname}/../example-src`
     const pathToStories = `${__dirname}/stories`
-    const { content: actual } = generateContentForStoryIndex(pathToSrc, pathToStories)
+    const { content: actual } = generateContentForStoryIndex(
+      pathToSrc,
+      pathToStories,
+    )
     const expected = `const {storyGenerator} = require('spdt')
 require('../../example-src/components/simple-component.story.js').default(
   storyGenerator,
@@ -20,7 +26,10 @@ require('../../example-src/components/simple-component.story.js').default(
 when pathToStories is one level deep`, () => {
     const pathToSrc = `${__dirname}/../example-src`
     const pathToStories = `${__dirname}/../stories`
-    const { content: actual } = generateContentForStoryIndex(pathToSrc, pathToStories)
+    const { content: actual } = generateContentForStoryIndex(
+      pathToSrc,
+      pathToStories,
+    )
     const expected = `const {storyGenerator} = require('spdt')
 require('../example-src/components/simple-component.story.js').default(
   storyGenerator,
@@ -40,7 +49,12 @@ require('../example-src/components/simple-component.story.js').default(
     const pathToSrc = `${__dirname}/../example-src`
     const existedPathToStories = `${__dirname}/stories`
     const actual = generateStoryIndex(pathToSrc, existedPathToStories)
-    const expected = [path.resolve(__dirname, '../example-src/components/simple-component.story.js')]
+    const expected = [
+      path.resolve(
+        __dirname,
+        '../example-src/components/simple-component.story.js',
+      ),
+    ]
     expect(actual.isRight()).toBeTruthy()
     expect(actual.right()).toEqual(expected)
   })

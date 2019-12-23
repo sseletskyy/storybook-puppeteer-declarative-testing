@@ -46,7 +46,11 @@ const setup = () => {
 describe('Test Generator', () => {
   it(`getFileName: check relative path generation`, () => {
     const { fileName, file: fl, pathToTestIndex: ptti } = setup()
-    const expected = [ptti, '/', fl.replace('.story.', '.generated.spdt.')].join('')
+    const expected = [
+      ptti,
+      '/',
+      fl.replace('.story.', '.generated.spdt.'),
+    ].join('')
     expect(fileName).toEqual(expected)
   })
 
@@ -187,7 +191,11 @@ describe('Test Generator', () => {
   })
 
   it('saveFile: when path is incorrect should put error to debug logger', () => {
-    const incorrectFile = path.resolve(__dirname, 'non-existed-dir', 'test-file-to.save')
+    const incorrectFile = path.resolve(
+      __dirname,
+      'non-existed-dir',
+      'test-file-to.save',
+    )
     const content = 'test content'
     saveFile(incorrectFile, content)
     expect(true).toBeTruthy()

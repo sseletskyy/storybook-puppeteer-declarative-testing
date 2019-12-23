@@ -1,5 +1,8 @@
 import path from 'path'
-import { generateContentForTestIndex, generateTestIndex } from '../lib/story-index-generator'
+import {
+  generateContentForTestIndex,
+  generateTestIndex,
+} from '../lib/story-index-generator'
 import { describe, it, expect } from './custom-jest'
 
 describe('Test Index Generator', function() {
@@ -7,7 +10,10 @@ describe('Test Index Generator', function() {
 when pathToStories is one level deep`, () => {
     const pathToSrc = `${__dirname}/../example-src`
     const pathToTestIndex = `${__dirname}`
-    const { content: actual } = generateContentForTestIndex(pathToSrc, pathToTestIndex)
+    const { content: actual } = generateContentForTestIndex(
+      pathToSrc,
+      pathToTestIndex,
+    )
     const expected = `const {testGenerator} = require('spdt/lib/test-generator.js')
 
 const fixtures0 = require('../example-src/components/simple-component.fixture.js')
@@ -32,7 +38,12 @@ testGenerator({
     const pathToSrc = `${__dirname}/../example-src`
     const nonExistedPathToTestIndex = `${__dirname}/e2e`
     const actual = generateTestIndex(pathToSrc, nonExistedPathToTestIndex)
-    const expected = [path.resolve(__dirname, '../example-src/components/simple-component.story.js')]
+    const expected = [
+      path.resolve(
+        __dirname,
+        '../example-src/components/simple-component.story.js',
+      ),
+    ]
     expect(actual.isRight()).toBeTruthy()
     expect(actual.right()).toEqual(expected)
   })

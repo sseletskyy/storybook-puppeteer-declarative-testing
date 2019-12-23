@@ -36,7 +36,12 @@ describe('Config', () => {
     const configPath = `${__dirname}/config.json`
     const actual = getConfig(configPath)
     const projectRoot = __dirname // dir where package.json is located
-    const expected = Object.assign({}, DEFAULT_CONFIG, overriddenConfig[PACKAGE_JSON_CONFIG_KEY], { projectRoot })
+    const expected = Object.assign(
+      {},
+      DEFAULT_CONFIG,
+      overriddenConfig[PACKAGE_JSON_CONFIG_KEY],
+      { projectRoot },
+    )
     expect(actual).toEqual(expected)
   })
 
