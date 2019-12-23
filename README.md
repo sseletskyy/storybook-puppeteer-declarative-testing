@@ -1,5 +1,5 @@
 # SPDT - Storybook Puppeteer Declarative Testing
-<p align="center">
+<p>
   <a href="https://app.codeship.com/projects/329679">
     <img src="https://app.codeship.com/projects/68070880-222e-0137-f223-6a5a7fbcefce/status?branch=master"
       alt="Codeship Status for sseletskyy/storybook-puppeteer-declarative-testing">
@@ -128,12 +128,12 @@ However **spdt** can speed up testing of any React application
 ```
 
 ## Which npm modules need to be installed 
-* @storybook/react@4.x (storybook v5 is not supported yet due to backward incompatible changes in location address format)
+* @storybook/react@5.x (if you still using storybook v4 please use version spdt@1.1.6)
 * @babel/node@^7.2 (@babel libs are used for generating test files)
 * @babel/core@^7.3
 * @babel/plugin-transform-runtime@^7.3
-* puppeteer@^1.13.0
-* jest-puppeteer@^4.0.0
+* puppeteer@^1.20.0
+* jest-puppeteer@^4.2.0
 * react@16.x 
 
 ## How to use
