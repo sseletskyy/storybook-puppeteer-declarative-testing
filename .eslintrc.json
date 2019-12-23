@@ -3,7 +3,9 @@
   "extends": [
     "plugin:prettier/recommended",
     "prettier",
-    "prettier/standard"
+    "prettier/standard",
+    "plugin:import/errors",
+    "plugin:import/warnings"
   ],
   "plugins": ["prettier", "jest"],
   "env": {

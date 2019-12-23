@@ -23,6 +23,10 @@
   </a>
 </p>
 
+## TL;DR
+
+```npm i -D spdt```
+or ```yarn add spdt -D```
 
 # Overview
 Declarative testing of isolated React components using storybook (v4) as a renderer and puppeteer+jest as a test runner.
@@ -99,10 +103,10 @@ However **spdt** can speed up testing of any React application
 * create a React component, e.g `Comment.js`
 * create a fixture file with a set of properties for your component: `Comment.fixture.js`
 * create a story file `Comment.story.js` which is used by Storybook to generate versions of your component based on fixture file:
-* run `node_modules/.bin/spdt:generate-story-index` to generate `.spdt/index.js` file for Storybook
+* run `npm run spdt:generate-story-index` to generate `.spdt/index.js` file for Storybook
 * add asserts/expectations for the component in fixture file (see examples below)
-* run `node_modules/.bin/spdt:generate-test-index` to generate `.spdt/test-index.generated.js` file.
-* run `node_modules/.bin/spdt:generate-tests` to generate test files for each React component (which has story and fixture files), e.g. `Comment.generated.spdt.js`
+* run `npm run spdt:generate-test-index` to generate `.spdt/test-index.generated.js` file.
+* run `npm run spdt:generate-tests` to generate test files for each React component (which has story and fixture files), e.g. `Comment.generated.spdt.js`
 * run Storybook server `npm run spdt:storybook`
 * run generated tests using jest + puppeteer `npm run spdt:test` (in another terminal tab)
 
@@ -367,7 +371,7 @@ This assertion will generate a separate `it` test to check provided selector
 
 ```
     it('should find component matching selector [div.card] 1 time(s)', async () => {
-      const components = await iFrame.$$('div.card')
+      const components = await page.$$('div.card')
       const expected = 1
       expect(components).toHaveLength(expected)
     }),
@@ -382,7 +386,7 @@ Value can be of `Boolean` type
 
 ```
     it('should load component as <svg>', async () => {
-      const component = await iFrame.$('svg')
+      const component = await page.$('svg')
       expect(component._remoteObject.description).toMatch('svg') // eslint-disable-line no-underscore-dangle
     })`
 ```
@@ -395,7 +399,7 @@ Value can be of `Number` type
 
 ```
     it('should have ${checkAxes} axes', async () => {
-      const axes = await iFrame.$$('g.axis')
+      const axes = await page.$$('g.axis')
       const expected = ${checkAxes}
       expect(axes).toHaveLength(expected)
     })`
@@ -410,7 +414,7 @@ Value can be of `Boolean` type
 
 ```
     it('should have ${checkBarsValue} bars according to fixture data', async () => {
-      const bars = await iFrame.$$('rect.bar')
+      const bars = await page.$$('rect.bar')
       const expected = ${checkBarsValue} // fixture.props.data.length
       expect(bars).toHaveLength(expected)
     })`
@@ -425,7 +429,7 @@ Value can be of `Boolean` type
 
 ```
     it('should have ${checkArcsValue} arcs according to fixture data', async () => {
-      const arcs = await iFrame.$$('path.arc')
+      const arcs = await page.$$('path.arc')
       const expected = ${checkArcsValue} // fixture.props.data.length
       expect(arcs).toHaveLength(expected)
     })`
@@ -456,7 +460,7 @@ const declarationTestH1 = (fixture) => {
   }
   return `
     it('testH1: should find component matching selector [${selector}] with value ${value}', async () => {
-      const components = await iFrame.$$eval('[id=root] ${selector}', elements => elements.map(e => e.innerText))
+      const components = await page.$$eval('[id=root] ${selector}', elements => elements.map(e => e.innerText))
       const expected = '${value}'
       expect(components).toContain(expected)
     })`
@@ -466,3 +470,24 @@ module.exports = {
   testH1: declarationTestH1,
 }
 ```
+
+## Continuous Integration workflow
+
+* make sure you have installed the module `start-server-and-test`
+
+```
+npm i -D start-server-and-test
+```
+* check `package.json` icludes these script commands
+```
+    "spdt:storybook:ci": "start-storybook --ci --quiet -p 9009 -c ./.spdt",
+    "spdt:ci": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook:ci",
+    "ci": "start-server-and-test spdt:ci 9009 spdt:test"
+```
+* just run `npm run ci`
+
+* module `start-server-and-test` does the magic:
+  * it executes `npm run spdt:ci`
+  * it listens when the port 9009 is available (storybook is up and running)
+  * it runs the tests `npm run spdt:test`
+  * it stops storybook when tests end

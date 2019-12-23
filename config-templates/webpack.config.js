@@ -5,7 +5,7 @@
 */
 
 // const path = require('path');
-// module.exports = (baseConfig, env, config) => {
+// module.exports = ({config, mode}) => {
 //   config.module.rules.push({
 //     test: /\.(ts|tsx)$/,
 //     use: [{

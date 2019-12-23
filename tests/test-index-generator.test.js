@@ -8,7 +8,7 @@ when pathToStories is one level deep`, () => {
     const pathToSrc = `${__dirname}/../example-src`
     const pathToTestIndex = `${__dirname}`
     const { content: actual } = generateContentForTestIndex(pathToSrc, pathToTestIndex)
-    const expected = `const {testGenerator} = require('spdt/lib/test-generator')
+    const expected = `const {testGenerator} = require('spdt/lib/test-generator.js')
 
 const fixtures0 = require('../example-src/components/simple-component.fixture.js')
   .default

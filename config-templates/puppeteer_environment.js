@@ -5,7 +5,7 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 
-const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup')
+const DIR = process.env.DIR || path.join(os.tmpdir(), 'jest_puppeteer_global_setup')
 
 class PuppeteerEnvironment extends NodeEnvironment {
   async setup() {

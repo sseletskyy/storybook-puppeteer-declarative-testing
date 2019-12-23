@@ -1,6 +1,6 @@
 {
   "name": "spdt",
-  "version": "1.1.6",
+  "version": "2.0.2",
   "description": "spdt stands for Storybook Puppeteer Declarative Testing. Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner",
   "main": "index.js",
   "files": [
@@ -18,6 +18,7 @@
   "scripts": {
     "lint": "eslint ./lib/*.js ./tests/*.js",
     "flint": "eslint ./lib/*.js ./tests/*.js --fix",
+    "prettier": "npx prettier --check --write \"lib/**/*.js\" \"tests/**/*.js\"",
     "test": "jest",
     "test:cover": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "tc": "npm run test:cover"
@@ -47,12 +48,14 @@
   },
   "homepage": "https://github.com/sseletskyy/storybook-puppeteer-declarative-testing#readme",
   "peerDependencies": {
-    "@storybook/react": "4.x",
+    "@storybook/react": "5.x",
     "jest-puppeteer": "^4.0.0",
     "puppeteer": "^1.13.0",
-    "react": "16.x"
+    "react": "16.x",
+    "start-server-and-test": "^1.7.13"
   },
   "dependencies": {
+    "@babel/preset-typescript": "^7.3.3",
     "debug": "^4.1.0",
     "fs": "^0.0.2",
     "monet": "^0.9.0",
@@ -65,15 +68,15 @@
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "babel-eslint": "10.0.1",
-    "babel-jest": "^24.1.0",
+    "babel-jest": "^24.9.0",
     "coveralls": "^3.0.3",
-    "eslint": "5.15.1",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jest": "^22.3.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "jest": "^24.1.0",
-    "prettier": "^1.16.4"
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2"
   },
   "prettier": {
     "printWidth": 120,
