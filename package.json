@@ -1,6 +1,6 @@
 {
   "name": "spdt",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "spdt stands for Storybook Puppeteer Declarative Testing. Declarative testing of isolated React components using storybook as a renderer and puppeteer+jest as a test runner",
   "main": "index.js",
   "files": [
