@@ -34,7 +34,7 @@ testGenerator({
     const actual = generateTestIndex(pathToSrc, nonExistedPathToTestIndex)
     expect(actual.isLeft()).toBeTruthy()
   })
-  it(`generateTestIndex: when pathToTestIndex is correct should return Either.Right with fileList`, () => {
+  it.skip(`generateTestIndex: when pathToTestIndex is correct should return Either.Right with fileList`, () => {
     const pathToSrc = `${__dirname}/../example-src`
     const nonExistedPathToTestIndex = `${__dirname}/e2e`
     const actual = generateTestIndex(pathToSrc, nonExistedPathToTestIndex)
