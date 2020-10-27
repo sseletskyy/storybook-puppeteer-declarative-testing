@@ -56,9 +56,9 @@ describe('Config', () => {
     const actual = generateScriptsForPackageJson()
     const expected = `  "scripts": {
     ...
-    "spdt:generate-story-index": "./node_modules/.bin/spdt:generate-story-index",
-    "spdt:generate-test-index": "./node_modules/.bin/spdt:generate-test-index",
-    "spdt:generate-tests": "./node_modules/.bin/spdt:generate-tests",
+    "spdt:generate-story-index": "./node_modules/spdt/bin/generate-story-index.js",
+    "spdt:generate-test-index": "./node_modules/spdt/bin/generate-test-index.js",
+    "spdt:generate-tests": "./node_modules/spdt/bin/generate-tests.js",
     "spdt:test": "jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js --runInBand",
     "spdt:test:chrome": "HEADLESS=false jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
     "spdt:test:chrome:slow": "SLOWMO=1000 HEADLESS=false jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
@@ -66,7 +66,7 @@ describe('Config', () => {
     "spdt:storybook:ci": "start-storybook --ci --quiet -p 9009 -c ./.spdt",
     "spdt": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook",
     "spdt:ci": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook:ci",
-    "ci": "start-server-and-test spdt:ci 9009 spdt:test"
+    "spdt:ci:test": "start-server-and-test spdt:ci 9009 spdt:test"
   }`
     expect(actual).toEqual(expected)
   })

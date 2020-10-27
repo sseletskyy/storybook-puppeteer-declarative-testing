@@ -56,7 +56,7 @@ We need to write a test to check that three items (with class .itemElement) will
 Let's write a fixture in such a form:
 ```javascript
 // file: src/example/__tests__/ProductList.fixture.js
-export default {
+const fixtures = {
   listOfThree: {
     props: {
       items: ['apricot', 'banana', 'carrot']
@@ -66,6 +66,7 @@ export default {
     }
   }
 }
+exports.default = fixtures;
 ```
 That simple declaration `checkSelector: {selector: '.itemElement', length: 3}` makes **spdt** library to generate a test for you.
 No need to copy-paste unit tests any more.
@@ -74,7 +75,7 @@ Just write a test pattern (declaration) once and reuse it over and over (see exa
 You can add as many fixtures as you want:
 ```javascript
 // file: src/example/__tests__/ProductList.fixture.js
-export default {
+const fixtures = {
   listOfThree: {
     props: {
       items: ['apricot', 'banana', 'carrot']
@@ -92,6 +93,7 @@ export default {
     }
   }
 }
+exports.default = fixtures;
 ```
 
 
@@ -117,9 +119,9 @@ However **spdt** can speed up testing of any React application
 * Copy generated scripts from terminal to your __package.json__ file
 
 ```
-    "spdt:generate-story-index": "./node_modules/.bin/spdt:generate-story-index",
-    "spdt:generate-test-index": "./node_modules/.bin/spdt:generate-test-index",
-    "spdt:generate-tests": "./node_modules/.bin/spdt:generate-tests",
+    "spdt:generate-story-index": "./node_modules/spdt/bin/generate-story-index.js",
+    "spdt:generate-test-index": "./node_modules/spdt/bin/generate-test-index.js",
+    "spdt:generate-tests": "./node_modules/spdt/bin/generate-tests.js",
     "spdt:test": "jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
     "spdt:test:chrome": "HEADLESS=false jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
     "spdt:test:chrome:slow": "SLOWMO=1000 HEADLESS=false jest --detectOpenHandles --config ./.spdt/jest.spdt.config.js",
@@ -127,14 +129,14 @@ However **spdt** can speed up testing of any React application
     "spdt": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook"
 ```
 
-## Which npm modules need to be installed 
+## Which npm modules need to be installed
 * @storybook/react@5.x (if you still using storybook v4 please use version spdt@1.1.6)
-* @babel/node@^7.2 (@babel libs are used for generating test files)
-* @babel/core@^7.3
-* @babel/plugin-transform-runtime@^7.3
-* puppeteer@^1.20.0
-* jest-puppeteer@^4.2.0
-* react@16.x 
+* @babel/node@^7.12 (@babel libs are used for generating test files)
+* @babel/core@^7.12
+* @babel/plugin-transform-runtime@^7.12
+* puppeteer@^5.4.0
+* jest-puppeteer@^4.4.0
+* react@16.x
 
 ## How to use
 
@@ -162,7 +164,7 @@ Create a fixture file `SimpleComponent.fixture.js` inside of `__tests__` folder 
 ```
 // file src/components/__tests__/SimpleComponent.fixture.js
 
-export default {
+const fixtures = {
   fixtureOne: {
     props: {
       title: 'Component Title',
@@ -182,6 +184,7 @@ export default {
     },
   },
 }
+exports.default = fixtures;
 ```
 
 Here is a schema of the fixture file
@@ -210,7 +213,7 @@ export default (storyGenerator) =>
     storiesOf,
     title: 'SimpleComponent',
     Component: SimpleComponent,
-    fixtures,
+    fixtures: fixtures.default,
   })
 ```
 
@@ -265,7 +268,7 @@ A file `Comment.fixture.js` inside of `__tests__` folder
 ```
 // file src/components/Article/__tests__Comment.fixture.js
 
-export default {
+const fixtures = {
   fixture1: {
     props: {
       comment: {
@@ -287,6 +290,7 @@ export default {
     },
   },
 }
+exports.default = fixtures;
 ```
 
 
@@ -317,7 +321,7 @@ export default (storyGenerator) =>
     storiesOf,
     title: 'Comment',
     Component: Component,
-    fixtures,
+    fixtures: fixtures.default,
   })
 ```
 
@@ -349,9 +353,9 @@ Teardown Test Environment.
 
 ## SPDT Declarations
 
-Use these declarations as keys in fixtures 
+Use these declarations as keys in fixtures
 ```
-export default {
+const fixtures = {
   [fixture name]: {
     props: { ... },
     spdt: {
@@ -359,6 +363,7 @@ export default {
     }
   }
 }
+exports.default = fixtures;
 ```
 ### checkSelector
 
@@ -444,10 +449,10 @@ Value can be of `Boolean` type
 ### Custom Declarations
 When you run initialization `node_modules/.bin/spdt:init`
 it creates the file *test-declarations.js*  and a directory *custom-declarations* in the folder *.spdt*
-Use the example *testH1* declaration as a guideline to add more custom declarations 
+Use the example *testH1* declaration as a guideline to add more custom declarations
 
 General requirements
-* The file *test-declarations.js* should export an object. 
+* The file *test-declarations.js* should export an object.
 * The key of the object is the name of a custom declaration
 * The value of the object is a function which takes a fixture and returns a string - generated **it** test for puppeteer+jest environment
 
@@ -488,9 +493,9 @@ npm i -D start-server-and-test
 ```
     "spdt:storybook:ci": "start-storybook --ci --quiet -p 9009 -c ./.spdt",
     "spdt:ci": "npm run spdt:generate-story-index && npm run spdt:generate-test-index && npm run spdt:generate-tests && npm run spdt:storybook:ci",
-    "ci": "start-server-and-test spdt:ci 9009 spdt:test"
+    "spdt:ci:test": "start-server-and-test spdt:ci 9009 spdt:test"
 ```
-* just run `npm run ci`
+* just run `npm run spdt:ci:test`
 
 * module `start-server-and-test` does the magic:
   * it executes `npm run spdt:ci`
