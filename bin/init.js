@@ -6,7 +6,6 @@ const {
   getConfig,
   generateConfigForPackageJson,
   generateScriptsForPackageJson,
-   */
   SPDT_DIR,
 } = require('../lib/config')
 
