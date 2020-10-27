@@ -10,10 +10,10 @@
     "/index.js"
   ],
   "bin": {
-    "spdt:generate-story-index": "./bin/generate-story-index.js",
-    "spdt:generate-test-index": "./bin/generate-test-index.js",
-    "spdt:generate-tests": "./bin/generate-tests.js",
-    "spdt:init": "./bin/init.js"
+    "spdt-generate-story-index": "./bin/generate-story-index.js",
+    "spdt-generate-test-index": "./bin/generate-test-index.js",
+    "spdt-generate-tests": "./bin/generate-tests.js",
+    "spdt-init": "./bin/init.js"
   },
   "scripts": {
     "lint": "eslint ./lib/*.js ./tests/*.js",
